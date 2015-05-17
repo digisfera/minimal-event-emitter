@@ -1,0 +1,15 @@
+{
+  "name": "minimal-event-emitter",
+  "version": "0.0.1",
+  "description": "A minimal event emitter implementation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tiago Quelhas <tiago@gmail.com>",
+  "license": "MIT",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/digisfera/minimal-event-emitter.git"
+  }
+}
