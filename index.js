@@ -1,11 +1,25 @@
+'use strict';
+
+/**
+ * @class
+ * @classdesc Minimalistic event emitter
+ */
 function EventEmitter() {}
 
+/**
+ * @param {String} event
+ * @param {Function} fn Handler function
+ */
 EventEmitter.prototype.addEventListener = function(event, fn) {
   var eventMap = this.__events = this.__events || {};
   var handlerList = eventMap[event] = eventMap[event] || [];
   handlerList.push(fn);
 };
 
+/**
+ * @param {String} event
+ * @param {Function} fn Handler function
+ */
 EventEmitter.prototype.removeEventListener = function(event, fn) {
   var eventMap = this.__events = this.__events || {};
   var handlerList = eventMap[event];
@@ -17,6 +31,9 @@ EventEmitter.prototype.removeEventListener = function(event, fn) {
   }
 };
 
+/**
+ * Emit an event
+ */
 EventEmitter.prototype.emit = function() {
   var eventMap = this.__events = this.__events || {};
   var event = arguments[0];
@@ -29,12 +46,17 @@ EventEmitter.prototype.emit = function() {
   }
 };
 
-EventEmitter.mixin = function(ctor) {
-  for (var prop in EventEmitter.prototype) {
-    if (EventEmitter.prototype.hasOwnProperty(prop)) {
-      ctor.prototype[prop] = EventEmitter.prototype[prop];
-    }
+/**
+ * Mixes in {@link EventEmitter} into a constructor function
+ *
+ * @memberof util
+ */
+function eventEmitter(ctor) {
+  var propList = Object.keys(EventEmitter.prototype);
+  for (var i = 0; i < propList.length; i++) {
+    var prop = propList[i];
+    ctor.prototype[prop] = EventEmitter.prototype[prop];
   }
-};
+}
 
-module.exports = EventEmitter;
+module.exports = eventEmitter;
