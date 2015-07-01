@@ -48,14 +48,12 @@ EventEmitter.prototype.emit = function() {
 
 /**
  * Mixes in {@link EventEmitter} into a constructor function
- *
- * @memberof util
  */
 function eventEmitter(ctor) {
-  var propList = Object.keys(EventEmitter.prototype);
-  for (var i = 0; i < propList.length; i++) {
-    var prop = propList[i];
-    ctor.prototype[prop] = EventEmitter.prototype[prop];
+  for (var prop in EventEmitter.prototype) {
+    if (EventEmitter.prototype.hasOwnProperty(prop)) {
+      ctor.prototype[prop] = EventEmitter.prototype[prop];
+    }
   }
 }
 
