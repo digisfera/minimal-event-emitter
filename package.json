@@ -1,6 +1,6 @@
 {
   "name": "minimal-event-emitter",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "A minimal EventEmitter implementation focused on portability and small footprint.",
   "main": "index.js",
   "scripts": {
