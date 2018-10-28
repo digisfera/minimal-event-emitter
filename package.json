@@ -7,7 +7,7 @@
     "test": "mocha --ui tdd"
   },
   "author": "Tiago Quelhas <tiagoq@gmail.com>",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/digisfera/minimal-event-emitter.git"
