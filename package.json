@@ -4,12 +4,16 @@
   "description": "A minimal event emitter implementation",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --ui tdd"
   },
   "author": "Tiago Quelhas <tiagoq@gmail.com>",
   "license": "MIT",
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/digisfera/minimal-event-emitter.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/digisfera/minimal-event-emitter.git"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0",
+    "sinon": "^7.1.0"
   }
 }
