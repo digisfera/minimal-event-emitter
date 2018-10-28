@@ -36,14 +36,14 @@ EventEmitter.prototype.removeEventListener = function(event, fn) {
 /**
  * Emit an event
  */
-EventEmitter.prototype.emit = function() {
+EventEmitter.prototype.emit = function(event, other_args) {
   var eventMap = this.__events = this.__events || {};
-  var event = arguments[0];
   var handlerList = eventMap[event];
+  var args = Array.prototype.slice.call(arguments, 1);
   if (handlerList) {
     for (var i = 0; i < handlerList.length; i++) {
       var fn = handlerList[i];
-      fn.apply(this, arguments);
+      fn.apply(this, args);
     }
   }
 };
