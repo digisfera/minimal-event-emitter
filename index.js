@@ -2,29 +2,35 @@
 
 /**
  * @class
- * @classdesc Minimalistic event emitter
+ * @classdesc Minimalistic event emitter mixin.
  */
 function EventEmitter() {}
 
 /**
- * @param {String} event
- * @param {Function} fn Handler function
+ * Registers an event listener for the specified event. If the listener has
+ * already been registered for the event, this is a no-op.
+ *
+ * @param {string} name The event name.
+ * @param {function} fn The listener function.
  */
-EventEmitter.prototype.addEventListener = function(event, fn) {
+EventEmitter.prototype.addEventListener = function(name, fn) {
   var eventMap = this.__events = this.__events || {};
-  var handlerList = eventMap[event] = eventMap[event] || [];
+  var handlerList = eventMap[name] = eventMap[name] || [];
   if (handlerList.indexOf(fn) < 0) {
     handlerList.push(fn);
   }
 };
 
 /**
- * @param {String} event
- * @param {Function} fn Handler function
+ * Unregisters an event listener from the specified event. If the listener
+ * hasn't been registered for the event, this is a no-op.
+ *
+ * @param {string} name The event name.
+ * @param {function} fn The listener function.
  */
-EventEmitter.prototype.removeEventListener = function(event, fn) {
+EventEmitter.prototype.removeEventListener = function(name, fn) {
   var eventMap = this.__events = this.__events || {};
-  var handlerList = eventMap[event];
+  var handlerList = eventMap[name];
   if (handlerList) {
     var index = handlerList.indexOf(fn);
     if (index >= 0) {
@@ -34,11 +40,15 @@ EventEmitter.prototype.removeEventListener = function(event, fn) {
 };
 
 /**
- * Emit an event
+ * Emits an event, causing all registered event listeners for that event to be
+ * called in registration order.
+ *
+ * @param {string} name The event name.
+ * @param {...*} var_args Arguments to call listeners with.
  */
-EventEmitter.prototype.emit = function(event, other_args) {
+EventEmitter.prototype.emit = function(name, var_args) {
   var eventMap = this.__events = this.__events || {};
-  var handlerList = eventMap[event];
+  var handlerList = eventMap[name];
   var args = Array.prototype.slice.call(arguments, 1);
   if (handlerList) {
     for (var i = 0; i < handlerList.length; i++) {
@@ -49,7 +59,9 @@ EventEmitter.prototype.emit = function(event, other_args) {
 };
 
 /**
- * Mixes in {@link EventEmitter} into a constructor function
+ * Mixes in {@link EventEmitter} into a constructor function.
+ *
+ * @param {function} ctor The constructor function.
  */
 function eventEmitter(ctor) {
   for (var prop in EventEmitter.prototype) {
