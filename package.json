@@ -1,7 +1,7 @@
 {
   "name": "minimal-event-emitter",
   "version": "0.0.2",
-  "description": "A minimal event emitter implementation",
+  "description": "A minimal EventEmitter implementation focused on portability and small footprint.",
   "main": "index.js",
   "scripts": {
     "test": "mocha --ui tdd"
