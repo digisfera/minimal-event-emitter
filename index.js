@@ -13,7 +13,9 @@ function EventEmitter() {}
 EventEmitter.prototype.addEventListener = function(event, fn) {
   var eventMap = this.__events = this.__events || {};
   var handlerList = eventMap[event] = eventMap[event] || [];
-  handlerList.push(fn);
+  if (handlerList.indexOf(fn) < 0) {
+    handlerList.push(fn);
+  }
 };
 
 /**
